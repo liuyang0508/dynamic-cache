@@ -5,46 +5,51 @@
 
 ![动态缓存](D:%5CInformation%5CPredictive%20Prevention%5Cliuyang%5CRequirement%20&%20Data%5C%E5%85%89%E7%BC%86%E6%95%B0%E5%AD%97%E5%8C%96%5C%E5%9B%BE%E6%9F%A5%E8%AF%A2%5C%E5%8A%A8%E6%80%81%E7%BC%93%E5%AD%98%5C%E5%8A%A8%E6%80%81%E7%BC%93%E5%AD%98.jpg)
 
-动态缓存
-介绍
+## 介绍
 动态缓存切面是一个基于AspectJ和Guava Cache实现的缓存策略。它可以根据缓存命中率、堆内存使用情况等因素，动态地决定是否将方法的结果缓存起来，从而提高系统性能和响应速度。
 
-作用
+## 作用
 动态缓存切面的作用是在方法执行前判断缓存中是否存在结果，并根据缓存命中率和堆内存使用情况来决定是否使用缓存。通过减少重复计算和数据库访问，可以大大提高系统性能和响应速度。
 
-效果
+## 效果
 使用动态缓存切面可以带来以下效果：
 
 减少重复计算：对于相同的输入参数，只需计算一次，后续直接从缓存中获取结果。
 减少数据库访问：对于频繁访问的数据，可以将结果缓存起来，减少对数据库的访问次数。
 提高系统性能：通过减少计算和数据库访问，可以大大提高系统的性能和响应速度。
-价值
+
+## 价值
 动态缓存切面的价值在于：
 
 提高系统性能和响应速度，提升用户体验。
 减少对数据库的访问，降低数据库负载。
 通过缓存策略的灵活配置，可以根据具体需求进行优化和调整。
-实现方式
+
+## 实现方式
 动态缓存切面的实现方式包括以下几个关键点：
 
-使用AspectJ实现切面：通过在方法执行前判断缓存中是否存在结果，并根据缓存命中率和堆内存使用情况来决定是否使用缓存。
-使用Guava Cache作为缓存实现：通过Guava Cache来存储缓存数据，并设置缓存过期时间、最大缓存数目等参数。
-使用ConcurrentHashMap来维护计数器和上一次请求时间戳：用于判断请求是否为重复请求，并根据阈值决定是否将请求纳入缓存。
-使用操作说明
-在需要使用动态缓存的方法上添加@DynamicCache注解，并配置相应的参数，如缓存过期时间、最大缓存数目等。
-在Spring配置文件中配置动态缓存切面的Bean，如<bean id="dynamicCacheAspect" class="com.base.common.aop.DynamicCacheAspect"/>。
-在需要使用动态缓存的方法上添加@DynamicCache注解，并配置相应的参数，如缓存过期时间、最大缓存数目等。
-运行程序，动态缓存切面
-使用操作样例
-引入依赖
+- 使用AspectJ实现切面：通过在方法执行前判断缓存中是否存在结果，并根据缓存命中率和堆内存使用情况来决定是否使用缓存。
+- 使用Guava Cache作为缓存实现：通过Guava Cache来存储缓存数据，并设置缓存过期时间、最大缓存数目等参数。
+- 使用ConcurrentHashMap来维护计数器和上一次请求时间戳：用于判断请求是否为重复请求，并根据阈值决定是否将请求纳入缓存。
 
+## 使用操作说明
+1. 在需要使用动态缓存的方法上添加@DynamicCache注解，并配置相应的参数，如缓存过期时间、最大缓存数目等。
+2. 在Spring配置文件中配置动态缓存切面的Bean，如<bean id="dynamicCacheAspect" class="com.base.common.aop.DynamicCacheAspect"/>。
+3. 在需要使用动态缓存的方法上添加@DynamicCache注解，并配置相应的参数，如缓存过期时间、最大缓存数目等。
+4. 运行程序，动态缓存切面
+
+## 使用操作样例
+1. 引入依赖
+~~~~xml
 <dependency>
     <groupId>com.base</groupId>
     <artifactId>common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
-注入动态缓存切面的Bean
+~~~~
 
+2. 注入动态缓存切面的Bean
+~~~~java
 /**
  * description: GraphQueryService 启动类
  *
@@ -61,8 +66,10 @@ public class GraphQueryServiceApplication {
     }
 
 }
-配置缓存相关参数
+~~~~
 
+3. 配置缓存相关参数
+~~~~xml
 cache:
   # 缓存过期时间；单位：分钟
   expired-time: 1
@@ -76,8 +83,10 @@ cache:
   high-rate-threshold: 10000
   # 最大堆内存百分比，超过则不被纳入缓存
   max-heap-memory-percentage: 1
-使用
+~~~~
 
+4. 使用
+~~~~java
 @DynamicCache(key = "Array.prototype.join.call(key, \"|\")", lowRateThreshold = 3000L, highRateThreshold = 60000L,
         tagCache = "OpticalCircuit, LogicalOpticalCircuit, Fiber, OpticalCableSegment, LinkSegment, Joint, GeoLocation")
 @LogRecord
@@ -86,7 +95,7 @@ cache:
 public List<Waypoint> queryGeoPipeSectionsInfoByOpticalCircuitName(@RequestParam("opticalCircuitName") String opticalCircuitName) {
     return geoACLInterceptorService.queryGeoPipeSectionsInfoByOpticalCircuitName(opticalCircuitName);
 }
-
+~~~~
 
 ~~~~java
 /*
