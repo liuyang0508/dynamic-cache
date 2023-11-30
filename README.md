@@ -3,6 +3,8 @@
 
 ## DynamicCacheAspect切面
 
+![动态缓存](D:%5CInformation%5CPredictive%20Prevention%5Cliuyang%5CRequirement%20&%20Data%5C%E5%85%89%E7%BC%86%E6%95%B0%E5%AD%97%E5%8C%96%5C%E5%9B%BE%E6%9F%A5%E8%AF%A2%5C%E5%8A%A8%E6%80%81%E7%BC%93%E5%AD%98%5C%E5%8A%A8%E6%80%81%E7%BC%93%E5%AD%98.jpg)
+
 ~~~~java
 /*
  * Copyright (c) Huawei Technologies Co. Ltd. 2023-2023. All rights reserved.
